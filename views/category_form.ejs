@@ -1,0 +1,40 @@
+<%- include('partials/head') %> <!-- ejs include, sort of importing code that can be reused to other module/file -->
+<body>
+    <%- include('partials/navbar') %> 
+    <main class="mt-5 mx-auto" style="width: 80vw">
+        <h1><%= title %></h1>
+        <form action="<% (title === 'Create Category') ? '/inventory/category/create' : '/inventory/category/category._id/update' %>" method="post" class="d-flex flex-column">
+            <div class="p-2">
+                <label for="name">Category: </label>
+                <input 
+                type="text" 
+                name="name" 
+                id="name" 
+                placeholder="Bed, Table etc." 
+                required 
+                value="<%= (typeof category === 'undefined') ? '' : category.name %>"
+                >
+            </div>
+            <div>
+                <label for="description">Description: </label><br>
+                <textarea 
+                name="description" 
+                id="description" 
+                cols="30" 
+                rows="10" 
+                placeholder="Add a description..."
+                ><%= (typeof category === 'undefined') ? '' : category.description %></textarea>
+            </div>
+            <button type="submit" class="btn btn-success" style="width: min-content;">Submit</button>
+        </form>
+        <% if(errors.length) { %>
+            <ul>
+                <% errors.forEach(error => {  %>
+                    <li class="err"><%= error.msg %></li>
+                    <% console.log(error.msg) %>
+                <% }) %>
+            </ul>
+        <% } %>
+    </main>
+</body>
+</html>

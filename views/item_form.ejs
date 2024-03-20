@@ -1,0 +1,82 @@
+<%- include('partials/head') %> <!-- ejs include, sort of importing code that can be reused to other module/file -->
+<body>
+    <%- include('partials/navbar') %> 
+    <main class="mt-5 mx-auto" style="width: 80vw">
+        <h1><%= title %></h1>
+        <form action="<% ( title === 'Create Item') ? '/inventory/item/create' : '/inventory/item/item._id/update' %>" method="post" class="d-flex flex-column">
+            <div class="p-2">
+                <label for="name">Item Name: </label>
+                <input 
+                type="text" 
+                name="name" 
+                id="name" 
+                placeholder="Wooden Chair, Glass table etc." 
+                required 
+                value="<%= (typeof item === 'undefined') ? '' : item.name %>"
+                >
+            </div>
+            <div class="p-2">
+                <label for="description">Description: </label> <br>
+                <textarea 
+                name="description" 
+                id="description" 
+                cols="30" 
+                rows="10"
+                maxlength="99"
+                placeholder="Description" 
+                required
+                ><%= (typeof item === 'undefined') ? '' : item.description %></textarea>
+            </div>
+            <div class="p-2">
+                <label for="category">Category: </label>
+                <select name="category" id="category">
+                    <option value=""> --Please select a category--</option>
+                    <% categories.forEach(category => { %>
+                        <% if(item) { %>
+                            <% if(category._id.toString() === item.category[0]._id.toString()) { %>
+                                <option value="<%= category._id %>" selected><%= category.name %></option>
+                            <% } else { %>
+                                <option value="<%= category._id %>"><%= category.name %></option>
+                            <% } %>
+                        <% } else { %>
+                            <option value="<%= category._id %>"><%= category.name %></option>
+                        <% } %>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="p-2">
+                <label for="price">Price: </label>
+                <input 
+                name="price"
+                id="price"
+                type="number" 
+                min="1"
+                required
+                value="<%= (typeof item === 'undefined') ? '' : item.price %>"
+                >
+            </div>
+            <div class="p-2">
+                <label for="quantity">Quantity: </label>
+                <input 
+                name="quantity"
+                id="quantity"
+                type="number" 
+                min="1"
+                required
+                value="<%= (typeof item === 'undefined') ? '' : item.quantity %>"
+                >
+            </div>
+
+            <button type="submit" class="btn btn-success" style="width: min-content;">Submit</button>
+        </form>
+        <% if(errors.length) { %>
+            <ul>
+                <% errors.forEach(error => {  %>
+                    <li class="err"><%= error.msg %></li>
+                    <% console.log(error.msg) %>
+                <% }) %>
+            </ul>
+        <% } %>
+    </main>
+</body>
+</html>

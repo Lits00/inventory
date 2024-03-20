@@ -1,0 +1,19 @@
+<%- include('partials/head') %> <!-- ejs include, sort of importing code that can be reused to other module/file -->
+<body>
+    <%- include('partials/navbar') %> 
+    <main class="mt-5 mx-auto" style="width: 80vw">
+        <h1><%= title %></h1>
+        <% if(categories.length){ %>
+            <div class="container-fluid">
+                <ul>
+                    <% for(const category of categories){ %>
+                        <li><a href="<%= category.url %>"><%= category.name %></a> </li>
+                    <% };%>  
+                </ul>
+            </div>
+        <% } else { %>
+            <p>There are no categories on the list.</p>
+        <% } %>
+    </main>
+</body>
+</html>

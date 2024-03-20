@@ -1,0 +1,29 @@
+<%- include('partials/head') %> <!-- ejs include, sort of importing code that can be reused to other module/file -->
+<body>
+    <%- include('partials/navbar') %> 
+    <main class="d-flex flex-column align-items-center mt-5">
+        <p>Welcome to <strong><%= title %></strong>, a very basic Express website app from <strong>The Odin Project</strong></p>
+        <p>The Furniture Inventory has the following record count:</p> 
+        <ul>
+            <li><strong>Categories:</strong> <%= category_count %></li>
+            <li><strong>Items:</strong> <%= item_count %></li>
+        </ul>
+        <div class="d-flex card">
+            <section class="d-flex flex-column align-items-center card-body">
+                <strong><h4>View</h4></strong>
+                <div class="d-flex">
+                    <a href="/inventory/categories" class="btn btn-dark btn-sm mx-1">Categories</a>
+                    <a href="/inventory/items" class="btn btn-dark btn-sm mx-1">Items</a>
+                </div>
+            </section>
+            <section class="d-flex flex-column align-items-center card-body">
+                <strong><h4>Create</h4></strong>
+                <div class="d-flex">
+                    <a href="/inventory/category/create" class="btn btn-dark btn-sm mx-1">New category</a>
+                    <a href="/inventory/item/create" class="btn btn-dark btn-sm mx-1">New item</a>
+                </div>
+            </section>
+        </div>        
+    </main>
+</body>
+</html>

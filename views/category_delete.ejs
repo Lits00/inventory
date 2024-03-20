@@ -1,0 +1,24 @@
+<%- include('partials/head') %> <!-- ejs include, sort of importing code that can be reused to other module/file -->
+<body>
+    <%- include('partials/navbar') %> 
+    <main class="mt-5 mx-auto" style="width: 80vw">
+        <h1><%= title %></h1>
+        <h2><%= category.name %></h2>
+        <% if(category_items.length) { %>
+            <p><strong>Delete the following items before attemptng to delete this Category.</strong></p>
+            <h4>Items</h4>
+            <ul>
+                <% category_items.forEach(item => { %>
+                    <li><a href="/inventory/item/<%= item._id %>"><%= item.name %></a> <p>Description: <%= item.description %></p></li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>Do you really want to delete this Category?</p>
+            <form action="<%= category.url %>/delete" method="post">
+                <input type="hidden" name="categoryid" value="<%= category._id %>">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        <% } %>
+    </main>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<%- include('partials/head') %> <!-- ejs include, sort of importing code that can be reused to other module/file -->
+<body>
+    <%- include('partials/navbar') %> 
+    <main class="mt-5 mx-auto" style="width: 80vw">
+        <h1><%= category.name %></h1>
+        <p><strong>Description:</strong> <%= category.description %></p>
+        <% if(items.length){%>
+            <p><strong>Items:</strong></p>
+            <ul>
+                <% items.forEach((item) => { %>
+                    <li><a href="<%= item.url%>"> <%= item.name %></a></li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>There are no items in this category.</p>
+        <% } %>
+        <hr>
+        <a href="<%= category.url %>/delete" class="btn btn-danger">Delete Category</a>
+        <a href="<%= category.url %>/update" class="btn btn-success">Update Category</a>
+    </main>
+</body>
+</html>
